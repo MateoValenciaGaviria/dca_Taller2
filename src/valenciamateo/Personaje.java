@@ -8,13 +8,15 @@ public abstract class Personaje extends Thread{
 	
 	protected Main app;
 	protected Logica log;
-	protected PVector pos;
-	protected int tam, nivel;
+	protected PVector pos, velocidad, aceleracion;
+	protected float tam, maxForce, maxVel;
+	protected int nivel;
 	protected boolean atacado, mareado, vivo;
 	protected ArrayList<Recolectable> recolectables;
 	
 	public Personaje(Main app, Logica log){
-		
+		this.app = app;
+		this.log = log;
 	}
 	
 	public abstract void pintar();
@@ -23,7 +25,7 @@ public abstract class Personaje extends Thread{
 	public PVector getPos(){
 		return pos;
 	}
-	public int getTam(){
+	public float getTam(){
 		return tam;
 	}
 	public int getNivel(){

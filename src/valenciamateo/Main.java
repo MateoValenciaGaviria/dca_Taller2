@@ -7,7 +7,6 @@ public class Main extends PApplet{
 	private Logica log;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		PApplet.main("valenciamateo.Main");
 	}
 	
@@ -20,7 +19,11 @@ public class Main extends PApplet{
 	}
 	
 	public void draw(){
-		
+		log.pintar();
+		fill(255);
+		text("X: "+mouseX+"Y: "+mouseY, mouseX, mouseY);
+		noFill();
+		//ellipse(mouseX, mouseY, 90, 90);
 	}
 	
 	public void mousePressed(){
@@ -28,7 +31,7 @@ public class Main extends PApplet{
 	}
 	
 	public void keyPressed(){
-		
+		log.keyPressed();
 	}
 
 }
