@@ -16,9 +16,11 @@ public class Main extends PApplet{
 	
 	public void setup(){
 		log = new Logica(this);
+		log.start();
 	}
 	
 	public void draw(){
+		background(0);
 		log.pintar();
 		fill(255);
 		text("X: "+mouseX+"Y: "+mouseY, mouseX, mouseY);
