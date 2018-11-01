@@ -76,11 +76,11 @@ public class Logica extends Thread{
 	}
 	
 	public void crearRecolectables(){
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i <= 30; i++) {
 			comida.add(new Recolectable(app, 0));
 		}
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i <= 10; i++) {
 			recolectables.add(new Recolectable(app,(int)app.random(1,5)));
 		}
 	}
@@ -91,6 +91,18 @@ public class Logica extends Thread{
 	
 	public ArrayList<Recolectable> getRecolectables(){
 		return recolectables;
+	}
+	
+	public ArrayList<Recolectable> getComida(){
+		return comida;
+	}
+	
+	public void removerRecolectables(int i){
+		recolectables.remove(i);
+	}
+	
+	public void removerComida(int i){
+		comida.remove(i);
 	}
 	
 	

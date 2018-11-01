@@ -29,6 +29,9 @@ public class Pacman extends Personaje {
 	}
 
 	public void pintar() {
+	//	app.textFont(fuente);
+		app.textAlign(app.CENTER);
+		app.text(nivel, pos.x, pos.y - 50);
 		app.imageMode(app.CENTER);
 		app.image(pacman, pos.x, pos.y, pacman.width / 4, pacman.height / 4);
 
@@ -67,6 +70,9 @@ public class Pacman extends Personaje {
 	public void run() {
 
 		while (vivo) {
+			
+			recogerComida();
+			recogerRecolectables();
 
 			// mover();
 
@@ -86,6 +92,28 @@ public class Pacman extends Personaje {
 
 		}
 
+	}
+
+	public void recogerRecolectables() {
+
+		for (int i = 0; i < log.getRecolectables().size(); i++) {
+			if ((pos.dist(log.getRecolectables().get(i).getPos()) < tam) && 
+				log.getRecolectables().get(i).isVisible()) {
+				recolectables.add(log.getRecolectables().get(i));
+				log.removerRecolectables(i);
+			}
+		}
+	}
+
+	public void recogerComida() {
+
+		for (int i = 0; i < log.getComida().size(); i++) {
+			if ((pos.dist(log.getComida().get(i).getPos()) < tam/2) && 
+				log.getComida().get(i).isVisible()) {
+				nivel++;
+				log.removerComida(i);
+			}
+		}
 	}
 
 	// ----------------------------------------------------------

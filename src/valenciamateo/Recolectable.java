@@ -60,5 +60,9 @@ public class Recolectable {
 	public void setVisible(boolean visibilidad) {
 		visible = visibilidad;
 	}
+	
+	public boolean isVisible(){
+		return visible;
+	}
 
 }
