@@ -23,16 +23,16 @@ public class Logica extends Thread{
 		this.contador2 = 0;
 		this.recolectables = new ArrayList<Recolectable>();
 		this.comida = new ArrayList<Recolectable>();
-		crearRecolectables();
-		this.fantasmas = new ArrayList<Fantasma>();
 		this.jugador = new Pacman(app, this);
 		this.jugador.start();
+		this.fantasmas = new ArrayList<Fantasma>();
+		crearFantasmas();
 	}
 	
 	public void run(){		
 		while (vivo) {
 			if(tiempo1 + 1000 < app.millis()){
-				comida.get(contador1).setVisible(true);
+				comida.add(new Recolectable(app, 0));
 				if(contador1 < 29){					
 					contador1++;
 				}
@@ -40,7 +40,7 @@ public class Logica extends Thread{
 			}
 			
 			if(tiempo2 + 2500 < app.millis()){
-				recolectables.get(contador2).setVisible(true);
+				recolectables.add(new Recolectable(app,(int)app.random(1,5)));
 				if(contador2 < 9){					
 					contador2++;
 				}
@@ -65,6 +65,10 @@ public class Logica extends Thread{
 			recolectables.get(i).pintar();
 		}
 		jugador.pintar();
+		
+		for (int i = 0; i < fantasmas.size(); i++) {
+			fantasmas.get(i).pintar();
+		}
 	}
 	
 	public void mousePressed(){
@@ -75,13 +79,11 @@ public class Logica extends Thread{
 		jugador.mover();
 	}
 	
-	public void crearRecolectables(){
-		for (int i = 0; i <= 30; i++) {
-			comida.add(new Recolectable(app, 0));
-		}
-		
-		for (int i = 0; i <= 10; i++) {
-			recolectables.add(new Recolectable(app,(int)app.random(1,5)));
+	public void crearFantasmas(){
+		for (int i = 0; i < 5; i++) {
+			Fantasma elFantasma = new Fantasma(app, this);
+			fantasmas.add(elFantasma);
+			elFantasma.start();
 		}
 	}
 	

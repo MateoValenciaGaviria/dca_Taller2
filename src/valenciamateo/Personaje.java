@@ -9,8 +9,8 @@ public abstract class Personaje extends Thread{
 	
 	protected Main app;
 	protected Logica log;
-	protected PVector pos, velocidad, aceleracion;
-	protected float tam, maxForce, maxVel;
+	protected PVector pos, vel;
+	protected float tam;
 	protected int nivel;
 	protected boolean atacado, mareado, vivo;
 	protected ArrayList<Recolectable> recolectables;
@@ -42,6 +42,25 @@ public abstract class Personaje extends Thread{
 	}
 	public ArrayList<Recolectable> getRecolectables(){
 		return recolectables;
+	}
+	public void recogerRecolectables() {
+
+		for (int i = 0; i < log.getRecolectables().size(); i++) {
+			if ((pos.dist(log.getRecolectables().get(i).getPos()) < tam)) {
+				recolectables.add(log.getRecolectables().get(i));
+				log.getRecolectables().remove(i);
+			}
+		}
+	}
+
+	public void recogerComida() {
+
+		for (int i = 0; i < log.getComida().size(); i++) {
+			if ((pos.dist(log.getComida().get(i).getPos()) < tam/2)) {
+				nivel++;
+				log.getComida().remove(i);
+			}
+		}
 	}
 	
 	

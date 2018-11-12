@@ -12,13 +12,11 @@ public class Recolectable {
 	private PImage[] recolectables;
 	private PVector pos;
 	private int tam, tipo;
-	private boolean visible;
 
 	public Recolectable(Main app, int tipo) {
 		this.app = app;
 		this.tipo = tipo;
 		this.tam = 90;
-		this.visible = false;
 		this.pos = new PVector(app.random(90, 1100), app.random(90, 600));
 
 		recolectables = new PImage[5];
@@ -31,7 +29,6 @@ public class Recolectable {
 
 	public void pintar() {
 		app.imageMode(app.CENTER);
-		if (visible) {
 			switch (tipo) {
 			case 0:
 				app.image(recolectables[0], pos.x, pos.y, recolectables[0].width / 4, recolectables[0].height / 4);
@@ -49,20 +46,11 @@ public class Recolectable {
 				app.image(recolectables[4], pos.x, pos.y, recolectables[4].width / 4, recolectables[4].height / 4);
 				break;
 			}
-		}
 		app.imageMode(app.CORNER);
 	}
 
 	public PVector getPos() {
 		return pos;
-	}
-
-	public void setVisible(boolean visibilidad) {
-		visible = visibilidad;
-	}
-	
-	public boolean isVisible(){
-		return visible;
 	}
 
 }

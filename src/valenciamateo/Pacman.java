@@ -19,38 +19,18 @@ public class Pacman extends Personaje {
 		this.mareado = false;
 		this.nivel = 0;
 		this.recolectables = new ArrayList<Recolectable>();
-		// ----------------------------------------------------------
 		this.pos = new PVector(app.width / 2, app.height / 2);
-		// this.velocidad = new PVector(0, 0);
-		// this.aceleracion = new PVector(0, 0);
-		// this.maxVel = 4;
-		// this.maxForce = 0.1f;
-		// ----------------------------------------------------------
+		this.vel = new PVector(3,3);
 	}
 
 	public void pintar() {
-	//	app.textFont(fuente);
 		app.textAlign(app.CENTER);
 		app.text(nivel, pos.x, pos.y - 50);
 		app.imageMode(app.CENTER);
 		app.image(pacman, pos.x, pos.y, pacman.width / 4, pacman.height / 4);
-
-		// ----------------------------------------------------------
-		// float angulo = velocidad.heading() + app.PI / 2;
-		// app.pushMatrix();
-		// app.translate(1,1);
-		// app.rotate(angulo);
-		// app.image(pacman, app.width / 2, app.height / 2, pacman.width / 4,
-		// pacman.height / 4);
-		// app.popMatrix();
-		// ----------------------------------------------------------
 	}
 
 	public void mover() {
-		// ----------------------------------------------------------
-		// PVector objetivo = new PVector(app.mouseX, app.mouseY);
-		// buscar(objetivo);
-		// ----------------------------------------------------------
 		switch (app.keyCode) {
 		case PConstants.UP:
 			pos.y -= 8;
@@ -73,18 +53,8 @@ public class Pacman extends Personaje {
 			
 			recogerComida();
 			recogerRecolectables();
-
-			// mover();
-
-			// ------------------------------------
-			// velocidad.add(aceleracion);
-			// velocidad.limit(maxVel);
-			// pos.add(velocidad);
-			// aceleracion.mult(0);
-			// ------------------------------------
-
 			try {
-				sleep(200);
+				sleep(20);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,43 +63,4 @@ public class Pacman extends Personaje {
 		}
 
 	}
-
-	public void recogerRecolectables() {
-
-		for (int i = 0; i < log.getRecolectables().size(); i++) {
-			if ((pos.dist(log.getRecolectables().get(i).getPos()) < tam) && 
-				log.getRecolectables().get(i).isVisible()) {
-				recolectables.add(log.getRecolectables().get(i));
-				log.removerRecolectables(i);
-			}
-		}
-	}
-
-	public void recogerComida() {
-
-		for (int i = 0; i < log.getComida().size(); i++) {
-			if ((pos.dist(log.getComida().get(i).getPos()) < tam/2) && 
-				log.getComida().get(i).isVisible()) {
-				nivel++;
-				log.removerComida(i);
-			}
-		}
-	}
-
-	// ----------------------------------------------------------
-
-	public void aplicarFuerza(PVector fuerza) {
-		aceleracion.add(fuerza);
-	}
-
-	public void buscar(PVector objetivo) {
-		PVector desired = PVector.sub(objetivo, pos);
-		desired.normalize();
-		desired.mult(maxVel);
-		PVector steer = PVector.sub(desired, velocidad);
-		steer.limit(maxForce);
-		aplicarFuerza(steer);
-	}
-
-	// ----------------------------------------------------------
 }
