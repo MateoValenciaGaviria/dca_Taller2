@@ -12,14 +12,13 @@ public abstract class Personaje extends Thread{
 	protected PVector pos, vel;
 	protected float tam;
 	protected int nivel;
-	protected boolean atacado, mareado, vivo;
+	protected boolean atacado, mareado, vivo, fresa, cereza, melon, pera;
 	protected ArrayList<Recolectable> recolectables;
 	protected PFont fuente;
 	
 	public Personaje(Main app, Logica log){
 		this.app = app;
 		this.log = log;
-	//	this.fuente = app.loadFont("PixelDigivolve.otf");
 	}
 	
 	public abstract void pintar();
@@ -57,8 +56,31 @@ public abstract class Personaje extends Thread{
 
 		for (int i = 0; i < log.getComida().size(); i++) {
 			if ((pos.dist(log.getComida().get(i).getPos()) < tam/2)) {
-				nivel++;
+				if(fresa){
+					nivel += 2;					
+				}else{
+					nivel++;
+				}
 				log.getComida().remove(i);
+			}
+		}
+	}
+	
+	public void aplicarRecolectables(){
+		for (int i = 0; i < recolectables.size(); i++) {
+			switch (recolectables.get(i).getTipo()) {
+			case 1:
+				fresa = true;
+				break;
+			case 2:
+				cereza = true;
+				break;
+			case 3:
+				melon = true;
+				break;
+			case 4:
+				pera = true;
+				break;
 			}
 		}
 	}

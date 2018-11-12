@@ -52,5 +52,9 @@ public class Recolectable {
 	public PVector getPos() {
 		return pos;
 	}
+	
+	public int getTipo(){
+		return tipo;
+	}
 
 }

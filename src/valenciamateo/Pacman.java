@@ -20,7 +20,11 @@ public class Pacman extends Personaje {
 		this.nivel = 0;
 		this.recolectables = new ArrayList<Recolectable>();
 		this.pos = new PVector(app.width / 2, app.height / 2);
-		this.vel = new PVector(3,3);
+		this.vel = new PVector(7,7);
+		this.fresa = false;
+		this.cereza = false;
+		this.melon = false;
+		this.pera = false;
 	}
 
 	public void pintar() {
@@ -33,16 +37,32 @@ public class Pacman extends Personaje {
 	public void mover() {
 		switch (app.keyCode) {
 		case PConstants.UP:
-			pos.y -= 8;
+			if(pera){
+				pos.y += vel.y;
+			}else{
+				pos.y -= vel.y;
+			}
 			break;
 		case PConstants.DOWN:
-			pos.y += 8;
+			if(pera){
+				pos.y -= vel.y;
+			}else {
+				pos.y += vel.y;
+			}
 			break;
 		case PConstants.LEFT:
-			pos.x -= 8;
+			if(pera){
+				pos.x += vel.x;
+			}else {
+				pos.x -= vel.x;
+			}
 			break;
 		case PConstants.RIGHT:
-			pos.x += 8;
+			if(pera){
+				pos.x -= vel.x;
+			}else {
+				pos.x += vel.x;
+			}
 			break;
 		}
 	}
@@ -51,6 +71,16 @@ public class Pacman extends Personaje {
 
 		while (vivo) {
 			
+			if(cereza){
+				vel = new PVector(9,9);
+				cereza = false;
+			}
+			
+			if(melon){
+				vel = new PVector(5,5);
+			}
+			
+			aplicarRecolectables();
 			recogerComida();
 			recogerRecolectables();
 			try {

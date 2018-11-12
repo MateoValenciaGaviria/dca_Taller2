@@ -32,6 +32,10 @@ public class Fantasma extends Personaje {
 		this.vivo = true;
 		this.atacado = false;
 		this.mareado = false;
+		this.fresa = false;
+		this.cereza = false;
+		this.melon = false;
+		this.pera = false;
 		this.nivel = 0;
 		this.recolectables = new ArrayList<Recolectable>();
 		this.color = (int) app.random(0, 9);
@@ -87,6 +91,7 @@ public class Fantasma extends Personaje {
 		while (vivo) {
 
 			mover();
+			aplicarRecolectables();
 			recogerComida();
 			recogerRecolectables();
 
@@ -100,5 +105,5 @@ public class Fantasma extends Personaje {
 		}
 
 	}
-
+	
 }
