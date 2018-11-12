@@ -85,6 +85,10 @@ public abstract class Personaje extends Thread{
 		}
 	}
 	
+	public void setNivel(int nivel){
+		this.nivel = nivel;
+	}
+	
 	
 
 }

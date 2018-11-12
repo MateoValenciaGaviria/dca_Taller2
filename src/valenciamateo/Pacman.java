@@ -20,7 +20,7 @@ public class Pacman extends Personaje {
 		this.nivel = 0;
 		this.recolectables = new ArrayList<Recolectable>();
 		this.pos = new PVector(app.width / 2, app.height / 2);
-		this.vel = new PVector(7,7);
+		this.vel = new PVector(9,9);
 		this.fresa = false;
 		this.cereza = false;
 		this.melon = false;
@@ -72,7 +72,7 @@ public class Pacman extends Personaje {
 		while (vivo) {
 			
 			if(cereza){
-				vel = new PVector(9,9);
+				vel = new PVector(11,11);
 				cereza = false;
 			}
 			

@@ -76,7 +76,7 @@ public class Fantasma extends Personaje {
 				vel.normalize();
 				pos.add(vel);
 
-			} else {
+			} else if(log.getJugador().getNivel() >= 1){
 				vel = PVector.sub(log.getJugador().getPos(), pos);
 				vel.normalize();
 				pos.add(vel);
@@ -89,11 +89,23 @@ public class Fantasma extends Personaje {
 	public void run() {
 
 		while (vivo) {
-
+			
 			mover();
+			
+			if(cereza){
+				vel = new PVector(9,9);
+				cereza = false;
+			}
+			
+			if(melon){
+				vel = new PVector(5,5);
+			}
+
 			aplicarRecolectables();
 			recogerComida();
 			recogerRecolectables();
+			
+			validarChoque();
 
 			try {
 				sleep(20);
@@ -104,6 +116,19 @@ public class Fantasma extends Personaje {
 
 		}
 
+	}
+	
+	public void validarChoque(){
+		Personaje pac = log.getJugador();
+		if(app.dist(pac.getPos().x, pac.getPos().y, pos.x, pos.y) < tam){
+			if(pac.getNivel() < nivel && pac.getNivel() >= 1){
+				pac.setNivel(pac.getNivel()-1);
+				nivel++;
+			}else if(pac.getNivel() > nivel && nivel >= 1){
+				pac.setNivel(pac.getNivel()+1);
+				nivel--;
+			}
+		}
 	}
 	
 }

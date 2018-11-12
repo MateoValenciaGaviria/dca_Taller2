@@ -25,11 +25,10 @@ public class Main extends PApplet{
 		fill(255);
 		text("X: "+mouseX+"Y: "+mouseY, mouseX, mouseY);
 		noFill();
-		//ellipse(mouseX, mouseY, 90, 90);
 	}
 	
 	public void mousePressed(){
-		
+		log.mousePressed();
 	}
 	
 	public void keyPressed(){
